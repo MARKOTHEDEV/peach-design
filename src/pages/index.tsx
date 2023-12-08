@@ -2,6 +2,11 @@ import Image from 'next/image'
 import { TiWorld } from "react-icons/ti";
 import { FaMoneyBillTrendUp,FaMoneyBill  } from "react-icons/fa6";
 import { MdOutlineHomeRepairService } from "react-icons/md"
+import { SiMicrostrategy } from "react-icons/si";
+import { FaVanShuttle } from "react-icons/fa6";
+import { SiThemodelsresource } from "react-icons/si";
+
+
 export default function Home() {
   return (
   <main >
@@ -10,9 +15,11 @@ export default function Home() {
     <div className='hero_section h-[500px] flex justify-center items-center gap-40 relative overflow-hidden' >
       <div>
         <div className=' '>
-          <TiWorld className='text-9xl mx-auto ' style={{'color':'#193498'}} />
-          {/* <h2 className='font-semibold font-moda text-xl	' style={{'color':'rgb(0 0 0 / 64%)'}}>TRICONTINENAL</h2>
-          <p>SOLUTIONS</p> */}
+          {/* <TiWorld className='text-9xl mx-auto ' style={{'color':'#193498'}} /> */}
+          <div className='w-[100px] h-[100px] mx-auto'>
+            <img className='w-full h-full object-contain' src="/logo_12.png" alt="" />
+          </div>
+          <h2 className='font-semibold font-moda text-5xl	text-center' style={{'color':'rgb(0 0 0 / 64%)'}}>OTB Midas</h2>
         </div>
         <p className='text-center font-cento'>Delivering innovative and
           <div></div>
@@ -32,8 +39,8 @@ export default function Home() {
 
     {/* Introduction */}
     <div className='p-8  pl-[100px]'>
-      <h2 className='font-moda font-light text-4xl pb-2'>Introduction</h2>
-      <p className='text-[#000000a3]'>
+      <h2 className='font-moda font-light text-5xl pb-2'>Introduction</h2>
+      <p className='text-[#000000a3] text-xl text-xl'>
       Procurement is fundamental to the effective functioning of <div></div> any organisation with third party external spend. 
       </p>
     </div>
@@ -61,14 +68,14 @@ export default function Home() {
         {/* stuff to use */}
         <div className='font-moda px-12'>
           <h2 className=' text-3xl py-1'>DIRECT SPEND</h2>
-          <p className='font-light	text-sm text-[#000000a3]'>
+          <p className='font-light	text-sm text-[#000000a3] text-xl'>
           This covers all spend that is directly related to the creation or provision of an {"organisation’s"} goods or services which ultimately get sold to customers. Examples are typical raw materials for production 
           </p>
         </div>
 
         <div className='font-moda px-12'>
           <h2 className=' text-3xl py-1'>INDIRECT SPEND</h2>
-          <p className='font-light	text-sm text-[#000000a3]'>
+          <p className='font-light	text-sm text-[#000000a3] text-xl'>
           This covers all spend that is not core to the production of an {"organization's"} goods or services but are required to for running the business. Examples include computers, software, IT support, HR, Office suppliers, uniforms etc.
 
           </p>
@@ -83,8 +90,8 @@ export default function Home() {
       
       <div className='w-1/2'>
       <h2 className='font-moda text-5xl '>Who Are We</h2>
-      <p className='text-[#000000a3]'>
-      Tricontinental Solutions is a procurement outsourcing and consultancy company, dedicated to delivering world class services to our clients. The services we provide can be split into two broad categories
+      <p className='text-[#000000a3] text-xl'>
+      OTB Midas Solutions is a procurement outsourcing and consultancy company, dedicated to delivering world class services to our clients. The services we provide can be split into two broad categories
       </p>
       </div>
           <br />
@@ -98,7 +105,7 @@ export default function Home() {
           <FaMoneyBill />
           </div>
           <h2 className='text-moda text-xl py-1'>MANAGED SERVICE </h2>
-          <p className='text-[#000000a3]'>
+          <p className='text-[#000000a3] text-xl'>
           We provide our clients with a managed procurement service for in scope goods and services. This involves the management of the source to delivery of requested goods and services 
           </p>
         </div>
@@ -108,7 +115,7 @@ export default function Home() {
             <MdOutlineHomeRepairService />
           </div>
           <h2 className='text-moda text-xl py-1'>CONSULTANCY SERVICES  </h2>
-          <p className='text-[#000000a3]'>
+          <p className='text-[#000000a3] text-xl'>
           We provide consultancy services to our clients to support their budgeting and spend profiles. This includes strategic reviews, policy development and maintenance, spend analysis, supplier and market analysis etc.
           </p>
         </div>
@@ -138,7 +145,7 @@ export default function Home() {
 
           <div className='bg-white rounded p-8 text-center shadow-2xl'>
             <div className='w-[120px] h-[120px] rounded-full overflow-hidden mx-auto	p-[2px] bg-[#1cd6ce]'>
-              <img src="/campaign.jpg" className='block h-full w-full rounded-full' alt="" />
+              <img src="/logistics.jpg" className='block h-full w-full rounded-full' alt="" />
             </div>
             <h2 className='p-2 text-black font-moda text-xl'>LOGISTICS</h2>
             <p className='text-black'>
@@ -148,7 +155,7 @@ export default function Home() {
 
           <div className='bg-[#193498] rounded p-8 text-center shadow-2xl'>
             <div className='w-[120px] h-[120px] rounded-full overflow-hidden mx-auto	p-[2px] bg-white'>
-              <img src="/campaign.jpg" className='block h-full w-full rounded-full' alt="" />
+              <img src="/CONTRACTS.jpg" className='block h-full w-full rounded-full' alt="" />
             </div>
             <h2 className='p-2 text-white font-moda text-xl'>CONTRACTS
 </h2>
@@ -160,7 +167,7 @@ export default function Home() {
 
           <div className='bg-white rounded p-8 text-center shadow-2xl'>
             <div className='w-[120px] h-[120px] rounded-full overflow-hidden mx-auto	p-[2px] bg-[#1cd6ce]'>
-              <img src="/campaign.jpg" className='block h-full w-full rounded-full' alt="" />
+              <img src="/logistics.jpg" className='block h-full w-full rounded-full' alt="" />
             </div>
             <h2 className='p-2 text-black font-moda text-xl'>SERVICE DELIVERY </h2>
             <p className='text-black'>
@@ -176,7 +183,7 @@ export default function Home() {
       
       <div className='w-1/2'>
       <h2 className='font-moda text-5xl '>Procurement Services</h2>
-      <p className='text-[#000000a3]'>
+      <p className='text-[#000000a3] text-xl'>
       The above two broad categories can be further split into 3 procurement service lines
       </p>
       </div>
@@ -193,8 +200,8 @@ export default function Home() {
           <FaMoneyBill />
           </div>
           <h2 className='text-moda text-xl py-1'>TRANSACTIONAL PROCUREMENT </h2>
-          <p className='text-[#000000a3]'>
-          Tricontinental Solutions can develop a catalogue for the most commonly required items and standardise your internal procurement process thus allowing your staff to get on with their day-to-day tasks with minimal disruption
+          <p className='text-[#000000a3] text-xl'>
+          OTB Midas Solutions can develop a catalogue for the most commonly required items and standardise your internal procurement process thus allowing your staff to get on with their day-to-day tasks with minimal disruption
 
           {/* We provide our clients with a managed procurement service for in scope goods and services. This involves the management of the source to delivery of requested goods and services  */}
           </p>
@@ -205,8 +212,8 @@ export default function Home() {
             <MdOutlineHomeRepairService />
           </div>
           <h2 className='text-moda text-xl py-1'>PROCUREMENT MANAGEMENT SERVICES </h2>
-          <p className='text-[#000000a3]'>
-          Tricontinental Solutions have the capability of managing your end-to-end tender/procurement process from requirements development through contract award and to ongoing contract management acting as a 1 stop shop for your external spend
+          <p className='text-[#000000a3] text-xl'>
+          OTB Midas Solutions have the capability of managing your end-to-end tender/procurement process from requirements development through contract award and to ongoing contract management acting as a 1 stop shop for your external spend
           </p>
         </div>
 
@@ -217,13 +224,13 @@ export default function Home() {
         <div className='mx-auto w-[700px] p-8 shadow-2xl  rounded'>
           {/* icon */}
           <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
-            <MdOutlineHomeRepairService />
+            <SiMicrostrategy />
           </div>
           <h2 className='text-moda text-xl py-1'>
             STRATEGIC PROCUREMENT
           </h2>
-          <p className='text-[#000000a3]'>
-          Tricontinental Solutions can develop, implement and manage organisation wide procurement strategies which will support the client’s strategic goals and objectives. We can develop and manage procurement policies as well as category management to support client goals. We can also manage or provide consultancy support for strategic tender/bid processes.
+          <p className='text-[#000000a3] text-xl'>
+          OTB Midas Solutions can develop, implement and manage organisation wide procurement strategies which will support the client’s strategic goals and objectives. We can develop and manage procurement policies as well as category management to support client goals. We can also manage or provide consultancy support for strategic tender/bid processes.
 
           </p>
         </div>
@@ -239,7 +246,7 @@ export default function Home() {
     <div className='w-1/2'>
       <div>
         <h2 className='font-moda text-5xl '>Procurement Spend Categories </h2>
-        <p className='text-[#000000a3] py-5'>We are able to support the management of your external spend with suppliers across all spend categories including</p>
+        <p className='text-[#000000a3] text-xl py-5'>We are able to support the management of your external spend with suppliers across all spend categories including</p>
       </div>
 
       <div className='relative'>
@@ -324,7 +331,7 @@ export default function Home() {
       
       <p className='py-2'>
       <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
-          Tricontinental Solutions have extensive relationships with key suppliers, manufacturers and distributors in the UK, US, Asia and in Nigeria which we leverage and allow us source and deliver all your requirements using the best-in-class procurement processes.
+          OTB Midas Solutions have extensive relationships with key suppliers, manufacturers and distributors in the UK, US, Asia and in Nigeria which we leverage and allow us source and deliver all your requirements using the best-in-class procurement processes.
       </p>
 
       <p className='py-2'>
@@ -363,8 +370,8 @@ export default function Home() {
             <h2 className='font-moda text-5xl py-4'>
             Our Approach
             </h2>
-            <p className='text-[#000000a3] leading-loose pr-10'>
-            The Tricontinental Solutions team will manage all necessary processes and supply chains to ensure that appropriately approved requests for goods and services are delivered in line with stated requirements and in accordance with the prevailing contractual terms and conditions. This will include compliance with the contractual service level agreements in place for standard and non-standard purchase requests.
+            <p className='text-[#000000a3] text-xl leading-loose pr-10'>
+            The OTB Midas Solutions team will manage all necessary processes and supply chains to ensure that appropriately approved requests for goods and services are delivered in line with stated requirements and in accordance with the prevailing contractual terms and conditions. This will include compliance with the contractual service level agreements in place for standard and non-standard purchase requests.
             </p>
           </div>
           
@@ -374,7 +381,7 @@ export default function Home() {
             >
               <img className='w-1/3 block' src="/approach.jpg" alt="" />
               <p className='w-2/3 px-12 py-8 leading-loose
-'>The service will be delivered using Tricontinental Solutions’s tested standard delivery model of a front-office with which the client interacts and a number of back offices which fully exploit our distributed delivery model and include the use and management of appropriate third party suppliers</p>
+'>The service will be delivered using OTB Midas Solutions’s tested standard delivery model of a front-office with which the client interacts and a number of back offices which fully exploit our distributed delivery model and include the use and management of appropriate third party suppliers</p>
             </div>
           </div>
  </div>
@@ -458,7 +465,7 @@ export default function Home() {
       
       <div className=''>
       <h2 className='font-moda text-5xl '>Procurement Spend Categories {"–"} Contd…</h2>
-      {/* <p className='text-[#000000a3]'>
+      {/* <p className='text-[#000000a3] text-xl'>
       The above two broad categories can be further split into 3 procurement service lines
       </p> */}
       </div>
@@ -472,13 +479,13 @@ export default function Home() {
         <div className=' p-8 shadow-xl  rounded'>
           {/* icon */}
           <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
-          <FaMoneyBill />
+          <FaVanShuttle />
           </div>
           <h2 className='text-moda text-xl py-1'>
           SUPPLIER MANAGEMENT
              </h2>
-          <p className='text-[#000000a3]'>
-          Tricontinental Solutions have the capability of managing your existing suppliers to limit and reduce your exposure to multiple individual suppliers which can be a major cause of distraction from the performance of core tasks and functions. This will include industry standard performance management to ensure our client consistently receives the anticipated value from the supplier.
+          <p className='text-[#000000a3] text-xl'>
+          OTB Midas Solutions have the capability of managing your existing suppliers to limit and reduce your exposure to multiple individual suppliers which can be a major cause of distraction from the performance of core tasks and functions. This will include industry standard performance management to ensure our client consistently receives the anticipated value from the supplier.
           {/* We provide our clients with a managed procurement service for in scope goods and services. This involves the management of the source to delivery of requested goods and services  */}
           </p>
         </div>
@@ -490,11 +497,11 @@ export default function Home() {
           <h2 className='text-moda text-xl py-1'>
           CONFIDENTIALITY  
           </h2>
-          <p className='text-[#000000a3]'>
-          Tricontinental Solutions understands the importance of confidentiality in business relationships and have all their staff and suppliers signed up to strict confidential clauses prior to engaging with us for the supply of goods and services. 
+          <p className='text-[#000000a3] text-xl'>
+          OTB Midas Solutions understands the importance of confidentiality in business relationships and have all their staff and suppliers signed up to strict confidential clauses prior to engaging with us for the supply of goods and services. 
           </p>
           <br />
-          <p className='text-[#000000a3]'>
+          <p className='text-[#000000a3] text-xl'>
           We have experience working with sensitive public and private sector clients such as the UK Ministry of Justice, the UK border Agency, UK Ministry of Defence, the French investment bank Calyon AG, Barclays bank, BP international and a host of others.
 
           </p>
@@ -506,11 +513,11 @@ export default function Home() {
           </div>
           <h2 className='text-moda text-xl py-1'>
           SERVICE LEVELS </h2>
-          <p className='text-[#000000a3]'>
+          <p className='text-[#000000a3] text-xl'>
           We work to agreed service level agreements and have regular service check point meetings with our clients.
           </p>
           <br />
-          <p className='text-[#000000a3]'>
+          <p className='text-[#000000a3] text-xl'>
           We will provide regular management reports to our clients keeping them informed of the status of our operations
           </p>
         </div>
@@ -518,21 +525,21 @@ export default function Home() {
         <div className=' p-8 shadow-xl  rounded'>
           {/* icon */}
           <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
-            <MdOutlineHomeRepairService />
+            <SiThemodelsresource />
           </div>
           <h2 className='text-moda text-xl py-1'>
           COMMERCIAL MODEL
           </h2>
-          <p className='text-[#000000a3]'>
-          Management fee {"–"} Our clients pay Tricontinental Solutions an engagement and ongoing management fee for the services provided
+          <p className='text-[#000000a3] text-xl'>
+          Management fee {"–"} Our clients pay OTB Midas Solutions an engagement and ongoing management fee for the services provided
           </p>
           <br />
-          <p className='text-[#000000a3]'>
-          Cost plus model - Our clients pay Tricontinental Solutions for the cost of the product plus an agreed mark up of that cost and the costs of delivery. This approach is supported by an open book policy to allow for transparency and ease of auditability.
+          <p className='text-[#000000a3] text-xl'>
+          Cost plus model - Our clients pay OTB Midas Solutions for the cost of the product plus an agreed mark up of that cost and the costs of delivery. This approach is supported by an open book policy to allow for transparency and ease of auditability.
           </p>
           <br />
-          <p className='text-[#000000a3]'>
-          Gain share {"–"} Tricontinental Solutions share the savings made on a procurement exercise with the client on a pre-agreed split basis
+          <p className='text-[#000000a3] text-xl'>
+          Gain share {"–"} OTB Midas Solutions share the savings made on a procurement exercise with the client on a pre-agreed split basis
 
           </p>
         </div>
@@ -549,7 +556,7 @@ export default function Home() {
       
       <div className='w-1/2'>
       <h2 className='font-moda text-5xl '>Benefits To Client</h2>
-      <p className='text-[#000000a3]'>
+      <p className='text-[#000000a3] text-xl'>
       Below are benefits clients enjoy!!
        </p>
        
@@ -559,17 +566,17 @@ export default function Home() {
         <div className='w-1/2'>
               <p className='py-2'>
               <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
-              Strategic price leverage - Tricontinental Solutions can typically source products and services at a better price point than our clients
+              Strategic price leverage - OTB Midas Solutions can typically source products and services at a better price point than our clients
               </p>
 
               <p className='py-2'>
               <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
-              Control – Adopting Tricontinental Solutions procurement processes will provide better control over your organisation spend 
+              Control – Adopting OTB Midas Solutions procurement processes will provide better control over your organisation spend 
               </p>
 
               <p className='py-2'>
               <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
-              Leverage – Leveraging on Tricontinental Solutions strategic commercial relationships with suppliers will deliver better quality purchasing and delivery
+              Leverage – Leveraging on OTB Midas Solutions strategic commercial relationships with suppliers will deliver better quality purchasing and delivery
               </p>
 
               
