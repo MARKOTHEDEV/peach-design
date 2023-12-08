@@ -622,7 +622,7 @@ export default function Home() {
       </div>
 
   </div>
-
+      {/* client area */}
   <div  className='p-8  pl-[100px]'>
       <h2 className='font-moda text-5xl '>Clients</h2>
       <br />
@@ -769,7 +769,37 @@ export default function Home() {
       </div>
 
   </div>  
+      {/* end client area */}
+      
 
+      {/*Engagement Process  */}
+      <div  className='p-8  pl-[100px]'>
+        <br />
+        <h2 className='font-moda text-5xl text-center '>Client Engagement Process</h2>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+          <img src="/shot.PNG" className='block h-full w-full' alt="" />
+        </div>
+      </div>
+      {/* end Engagement Process  */}
+
+
+      {/* solution values add  */}
+      <div  className='p-8  pl-[100px]'>
+        <br />
+        <h2 className='font-moda text-5xl text-center '>TRICONTINENTAL SOLUTIONS VALUE ADDS </h2>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+          <img src="/big2.png" className='block h-full w-full' alt="" />
+        </div>
+      </div>
+      {/* end solution values add  */}
   </main>
   )
 }
