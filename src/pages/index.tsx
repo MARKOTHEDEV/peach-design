@@ -356,6 +356,97 @@ export default function Home() {
 
 </div>
 {/*  End of Procument SPend*/}
+ 
+ {/* our approach */}
+ <div className='p-8  pl-[100px] flex'>
+          <div className='w-1/2'>
+            <h2 className='font-moda text-5xl py-4'>
+            Our Approach
+            </h2>
+            <p className='text-[#000000a3] leading-loose pr-10'>
+            The Tricontinental Solutions team will manage all necessary processes and supply chains to ensure that appropriately approved requests for goods and services are delivered in line with stated requirements and in accordance with the prevailing contractual terms and conditions. This will include compliance with the contractual service level agreements in place for standard and non-standard purchase requests.
+            </p>
+          </div>
+          
+          <div className='w-1/2'>
+            <div className='shadow-xl flex rounded overflow-hidden w-[600px] translate-y-20 bg-white' 
+            // style={{'border':'1px solid red'}}
+            >
+              <img className='w-1/3 block' src="/approach.jpg" alt="" />
+              <p className='w-2/3 px-12 py-8 leading-loose
+'>The service will be delivered using Tricontinental Solutions’s tested standard delivery model of a front-office with which the client interacts and a number of back offices which fully exploit our distributed delivery model and include the use and management of appropriate third party suppliers</p>
+            </div>
+          </div>
+ </div>
+ <div className='bg-[#193498]'>
+          <div className='p-8  pl-[100px] text-white'>
+            <p 
+            className='w-[600px] text-2xl'
+            >Our service will be responsible for all aspects of purchase order satisfaction and will include the following service elements:</p>
+                    <br />
+          <div className='grid gap-10 grid-cols-3 items-center justify-center	'>
+
+            <div className='flex gap-5 items-center'>
+              <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+                <MdOutlineHomeRepairService />
+              </div>
+              <p className='leading-relaxed '>
+                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              </p>
+            </div>
+
+            <div className='flex gap-5 items-center'>
+              <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+                <MdOutlineHomeRepairService />
+              </div>
+              <p className='leading-relaxed '>
+                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              </p>
+            </div>
+            
+            <div className='flex gap-5 items-center'>
+              <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+                <MdOutlineHomeRepairService />
+              </div>
+              <p className='leading-relaxed '>
+                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              </p>
+            </div>
+
+
+            <div className='flex gap-5 items-center'>
+              <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+                <MdOutlineHomeRepairService />
+              </div>
+              <p className='leading-relaxed '>
+                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              </p>
+            </div>
+
+            <div className='flex gap-5 items-center'>
+              <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+                <MdOutlineHomeRepairService />
+              </div>
+              <p className='leading-relaxed '>
+                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              </p>
+            </div>
+
+            <div className='flex gap-5 items-center'>
+              <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+                <MdOutlineHomeRepairService />
+              </div>
+              <p className='leading-relaxed '>
+                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              </p>
+            </div>
+            
+          </div>
+          
+          </div>
+
+ </div>
+ {/* end of our approach */}
   </main>
   )
 }
