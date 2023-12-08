@@ -452,6 +452,94 @@ export default function Home() {
 
  </div>
  {/* end of our approach */}
+
+ {/* Procurement Spend Categories */}
+ <div className='p-8  pl-[100px]'>
+      
+      <div className=''>
+      <h2 className='font-moda text-5xl '>Procurement Spend Categories {"–"} Contd…</h2>
+      {/* <p className='text-[#000000a3]'>
+      The above two broad categories can be further split into 3 procurement service lines
+      </p> */}
+      </div>
+          <br />
+
+      <div
+      // 
+      className='grid gap-10 grid-cols-2  gap-3' 
+      // style={{'border':'1px solid red'}}
+      >
+        <div className=' p-8 shadow-xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+          <FaMoneyBill />
+          </div>
+          <h2 className='text-moda text-xl py-1'>
+          SUPPLIER MANAGEMENT
+             </h2>
+          <p className='text-[#000000a3]'>
+          Tricontinental Solutions have the capability of managing your existing suppliers to limit and reduce your exposure to multiple individual suppliers which can be a major cause of distraction from the performance of core tasks and functions. This will include industry standard performance management to ensure our client consistently receives the anticipated value from the supplier.
+          {/* We provide our clients with a managed procurement service for in scope goods and services. This involves the management of the source to delivery of requested goods and services  */}
+          </p>
+        </div>
+        <div className='p-8 shadow-xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+            <MdOutlineHomeRepairService />
+          </div>
+          <h2 className='text-moda text-xl py-1'>
+          CONFIDENTIALITY  
+          </h2>
+          <p className='text-[#000000a3]'>
+          Tricontinental Solutions understands the importance of confidentiality in business relationships and have all their staff and suppliers signed up to strict confidential clauses prior to engaging with us for the supply of goods and services. 
+          </p>
+          <p className='text-[#000000a3]'>
+          We have experience working with sensitive public and private sector clients such as the UK Ministry of Justice, the UK border Agency, UK Ministry of Defence, the French investment bank Calyon AG, Barclays bank, BP international and a host of others.
+
+          </p>
+        </div>
+        <div className=' p-8 shadow-xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+            <MdOutlineHomeRepairService />
+          </div>
+          <h2 className='text-moda text-xl py-1'>
+          SERVICE LEVELS </h2>
+          <p className='text-[#000000a3]'>
+          We work to agreed service level agreements and have regular service check point meetings with our clients.
+          </p>
+          <p className='text-[#000000a3]'>
+          We will provide regular management reports to our clients keeping them informed of the status of our operations
+          </p>
+        </div>
+
+        <div className=' p-8 shadow-xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+            <MdOutlineHomeRepairService />
+          </div>
+          <h2 className='text-moda text-xl py-1'>
+          COMMERCIAL MODEL
+          </h2>
+          <p className='text-[#000000a3]'>
+          Management fee {"–"} Our clients pay Tricontinental Solutions an engagement and ongoing management fee for the services provided
+          </p>
+
+          <p className='text-[#000000a3]'>
+          Cost plus model - Our clients pay Tricontinental Solutions for the cost of the product plus an agreed mark up of that cost and the costs of delivery. This approach is supported by an open book policy to allow for transparency and ease of auditability.
+          </p>
+          <p className='text-[#000000a3]'>
+          Gain share {"–"} Tricontinental Solutions share the savings made on a procurement exercise with the client on a pre-agreed split basis
+
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+ {/* Procurement Spend Categories */}
+
+
   </main>
   )
 }
