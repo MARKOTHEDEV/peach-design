@@ -400,7 +400,8 @@ export default function Home() {
                 <MdOutlineHomeRepairService />
               </div>
               <p className='leading-relaxed '>
-                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              A single point of contact for receiving and fulfilling all approved in-scope purchase requests
+
               </p>
             </div>
             
@@ -409,7 +410,8 @@ export default function Home() {
                 <MdOutlineHomeRepairService />
               </div>
               <p className='leading-relaxed '>
-                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              A customer service desk for managing queries, non-standard requests and market intelligence 
+
               </p>
             </div>
 
@@ -419,7 +421,8 @@ export default function Home() {
                 <MdOutlineHomeRepairService />
               </div>
               <p className='leading-relaxed '>
-                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              Development and maintenance of a standard catalogue of a products and services
+
               </p>
             </div>
 
@@ -428,7 +431,8 @@ export default function Home() {
                 <MdOutlineHomeRepairService />
               </div>
               <p className='leading-relaxed '>
-                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              Provision of procurement analytics including spend reports and service reports
+
               </p>
             </div>
 
@@ -437,7 +441,8 @@ export default function Home() {
                 <MdOutlineHomeRepairService />
               </div>
               <p className='leading-relaxed '>
-                A dedicated team of experienced procurement professionals focused on delivering sustainable commercial advantage through best practice tools and methodologies
+              Periodic benchmarking of suppliers to ensure sustainable value delivery 
+
               </p>
             </div>
             
