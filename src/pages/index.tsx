@@ -540,6 +540,86 @@ export default function Home() {
  {/* Procurement Spend Categories */}
 
 
+
+
+ <div className='p-8  pl-[100px]'>
+      
+      <div className='w-1/2'>
+      <h2 className='font-moda text-5xl '>Benefits To Client</h2>
+      <p className='text-[#000000a3]'>
+      Below are benefits clients enjoy!!
+       </p>
+       
+      </div>
+
+      <div className='flex gap-5'>
+        <div className='w-1/2'>
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Strategic price leverage - Tricontinental Solutions can typically source products and services at a better price point than our clients
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Control – Adopting Tricontinental Solutions procurement processes will provide better control over your organisation spend 
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Leverage – Leveraging on Tricontinental Solutions strategic commercial relationships with suppliers will deliver better quality purchasing and delivery
+              </p>
+
+              
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Reducing overall cost of operations
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Reducing overall cost of operations
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Accurate reconciliation and auditability 
+              </p>
+        </div>
+        <div className='w-1/2'>
+        <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Electronic transactions and archiving (where possible)
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Intuitive and assessable user service
+              </p>
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Single touch fulfilment process
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Standardisation of purchases for easier maintenance and flexibility
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Strengthen negotiating position with key suppliers
+              </p>
+
+              <p className='py-2'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Freedom to focus on core business
+              </p>
+
+        </div>
+      </div>
+
+  </div>
+
   </main>
   )
 }
