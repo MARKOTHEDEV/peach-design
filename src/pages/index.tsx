@@ -56,7 +56,7 @@ export default function Home() {
       </div>
 
       <div className='w-1/2 flex flex-col	gap-20' 
-      // style={{'border':'1px solid red'}}
+      // 
       >
         {/* stuff to use */}
         <div className='font-moda px-12'>
@@ -90,7 +90,7 @@ export default function Home() {
           <br />
 
       <div className='flex gap-10 w-[1100px]' 
-      // style={{'border':'1px solid red'}}
+      // 
       >
         <div className='w-1/2 p-8 shadow-2xl  rounded'>
           {/* icon */}
@@ -169,7 +169,193 @@ export default function Home() {
           </div>
         </div>
     </div>
+{/* end of our team */}
 
+{/* procurement */}
+<div className='p-8  pl-[100px]'>
+      
+      <div className='w-1/2'>
+      <h2 className='font-moda text-5xl '>Procurement Services</h2>
+      <p className='text-[#000000a3]'>
+      The above two broad categories can be further split into 3 procurement service lines
+      </p>
+      </div>
+          <br />
+
+      <div
+      // 
+      className='flex gap-10 w-[1100px]' 
+      // style={{'border':'1px solid red'}}
+      >
+        <div className='w-1/2 p-8 shadow-2xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+          <FaMoneyBill />
+          </div>
+          <h2 className='text-moda text-xl py-1'>TRANSACTIONAL PROCUREMENT </h2>
+          <p className='text-[#000000a3]'>
+          Tricontinental Solutions can develop a catalogue for the most commonly required items and standardise your internal procurement process thus allowing your staff to get on with their day-to-day tasks with minimal disruption
+
+          {/* We provide our clients with a managed procurement service for in scope goods and services. This involves the management of the source to delivery of requested goods and services  */}
+          </p>
+        </div>
+        <div className='w-1/2 p-8 shadow-2xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+            <MdOutlineHomeRepairService />
+          </div>
+          <h2 className='text-moda text-xl py-1'>PROCUREMENT MANAGEMENT SERVICES </h2>
+          <p className='text-[#000000a3]'>
+          Tricontinental Solutions have the capability of managing your end-to-end tender/procurement process from requirements development through contract award and to ongoing contract management acting as a 1 stop shop for your external spend
+          </p>
+        </div>
+
+      </div>
+      <br />
+      <br />
+        <div className='w-[1100px]'>
+        <div className='mx-auto w-[700px] p-8 shadow-2xl  rounded'>
+          {/* icon */}
+          <div className='text-white bg-[teal] inline-block p-2 rounded-full text-3xl'>
+            <MdOutlineHomeRepairService />
+          </div>
+          <h2 className='text-moda text-xl py-1'>
+            STRATEGIC PROCUREMENT
+          </h2>
+          <p className='text-[#000000a3]'>
+          Tricontinental Solutions can develop, implement and manage organisation wide procurement strategies which will support the client’s strategic goals and objectives. We can develop and manage procurement policies as well as category management to support client goals. We can also manage or provide consultancy support for strategic tender/bid processes.
+
+          </p>
+        </div>
+        </div>
+        <br />
+        <p className='text-center'>All our processes all have a clear and auditable trail of request to fulfilment including relevant approval steps as required.
+</p>
+    </div>
+{/*end of procurement  */}
+
+{/*  Procument SPend*/}
+<div className='p-8  pl-[100px] flex gap-10'> 
+    <div className='w-1/2'>
+      <div>
+        <h2 className='font-moda text-5xl '>Procurement Spend Categories </h2>
+        <p className='text-[#000000a3] py-5'>We are able to support the management of your external spend with suppliers across all spend categories including</p>
+      </div>
+
+      <div className='relative'>
+        <div className='absolute w-[2px]   h-full bg-black translate-x-[230px]'>
+          {/* line */}
+        </div>
+          <div className='my-5 1/2 flex gap-40'>
+              {/* div1 */}
+              <h2 className='flex text-lg flex items-center '>
+                
+                {/* <span className='block bg-[teal] w-[10px] h-[10px] rounded-full'></span> */}
+                <span>
+                  INFORMATION TECHNOLOGY (IT)
+                </span>
+                 </h2>
+              <p>
+                Software, hardware, personnel, disaster recovery, outsourcing and occupancy costs related to supporting IT within the organisation
+              </p>
+          </div>
+
+
+          <div className='my-5 1/2 flex gap-40 justify-between	'  >
+              {/* div1 */}
+              <h2 className='text-lg flex items-center gap-2' >
+                {/* <span className='inline-block bg-[teal] w-[25px] h-[25px] rounded-full'></span> */}
+                <span>
+                FACILITIES 
+                </span>
+                 </h2>
+              <p className='text-right' >
+              Office Furniture, building fittings, building accessories
+              </p>
+          </div>
+
+          <div className='my-5 1/2 flex gap-40 justify-between	'  >
+              {/* div1 */}
+              <h2 className='text-lg flex items-center gap-2' >
+                {/* <span className='inline-block bg-[teal] w-[25px] h-[25px] rounded-full'></span> */}
+                <span>
+                OFFICE SUPPLIES 
+                </span>
+                 </h2>
+              <p className='text-right' >
+              Stationery, pens, pencils, erasers, rulers, stamps, highlighters, notebooks, printing paper, replacement printer inks, sticky pads, training boards, whiteboards, whiteboard pens, smartboards etc
+
+              </p>
+          </div>
+          <div className='my-5 1/2 flex gap-40 justify-between	'  >
+              {/* div1 */}
+              <h2 className='text-lg flex items-center gap-2' >
+                {/* <span className='inline-block bg-[teal] w-[25px] h-[25px] rounded-full'></span> */}
+                <span>
+                CORPORATE MERCHANDISE 
+
+                </span>
+                 </h2>
+              <p className='text-right' >
+              Staff uniforms, corporate gifts, branded material
+
+              </p>
+          </div>
+
+          <div className='my-5 1/2 flex gap-40 justify-between	'  >
+              {/* div1 */}
+              <h2 className='text-lg flex items-center gap-2' >
+                {/* <span className='inline-block bg-[teal] w-[25px] h-[25px] rounded-full'></span> */}
+                <span>
+                TRAINING
+
+                </span>
+                 </h2>
+              <p className='text-right' >
+              In house, training and external training; Train the trainer for {"SME’s"} skills transfer
+              </p>
+          </div>
+      </div>
+    </div>
+
+    <div className='w-1/2 bg-[#193498] rounded p-8 text-white'>
+      <h2 className='text-xl'>DELIVERING VALUE </h2>
+      <br />
+      
+      <p className='py-2'>
+      <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+          Tricontinental Solutions have extensive relationships with key suppliers, manufacturers and distributors in the UK, US, Asia and in Nigeria which we leverage and allow us source and deliver all your requirements using the best-in-class procurement processes.
+      </p>
+
+      <p className='py-2'>
+      <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+      Our {"team’s"} experience in implementing lean practices drives out waste and help streamline the procurement process to deliver the optimum value to our clients 
+      </p>
+
+      <p className='py-2'>
+      <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+      We have a wealth of experience in delivering procurement outsourcing programmes to private and public sector clients typically helping our clients to reduce their recurring procurement costs on average by 5% - 20% and their one-off strategic procurement instances in excess of 25%.
+      </p>
+
+      <p className='py-2'>
+      <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+      The service we provide is aimed at maximising the value your organisation derives from its spend which frees up your time and leverages on our expertise to delivering a credible and auditable spend process.
+      </p>
+      <p className='py-2'>
+      <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+      Our approach is always collaborative with our clients, as we have discovered over the years that it delivers the best results.
+      </p>
+
+      <p className='py-2'>
+      <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+      We are also experienced in providing consultancy and training services to our clients to support them in upskilling their staff and processes to support their various projects
+      </p>
+
+
+    </div>
+
+</div>
+{/*  End of Procument SPend*/}
   </main>
   )
 }
