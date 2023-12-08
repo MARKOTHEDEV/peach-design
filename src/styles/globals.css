@@ -10,11 +10,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-body{
+/* body{
   font-family: 'Bellefair', serif;
   font-family: 'Bodoni Moda', serif;
   font-family: 'Quattrocento Sans', sans-serif;
-}
+} */
 
 
 .hero_section{
@@ -22,6 +22,15 @@ body{
   linear-gradient(to right,rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76) ),
   url("../../public/banner.jpg") ;
   background-repeat: no-repeat;
-  background-size: cover;
-  
+  background-size: cover;  
+}
+
+
+.introduction_curve{
+  background-image:
+  linear-gradient(to right,rgba(0, 0, 255, 0.753), rgba(0, 0, 255, 0.753) ),
+  url("../../public/banner.jpg") ;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  /* background-color: red; */
 }
