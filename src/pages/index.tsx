@@ -493,6 +493,7 @@ export default function Home() {
           <p className='text-[#000000a3]'>
           Tricontinental Solutions understands the importance of confidentiality in business relationships and have all their staff and suppliers signed up to strict confidential clauses prior to engaging with us for the supply of goods and services. 
           </p>
+          <br />
           <p className='text-[#000000a3]'>
           We have experience working with sensitive public and private sector clients such as the UK Ministry of Justice, the UK border Agency, UK Ministry of Defence, the French investment bank Calyon AG, Barclays bank, BP international and a host of others.
 
@@ -508,6 +509,7 @@ export default function Home() {
           <p className='text-[#000000a3]'>
           We work to agreed service level agreements and have regular service check point meetings with our clients.
           </p>
+          <br />
           <p className='text-[#000000a3]'>
           We will provide regular management reports to our clients keeping them informed of the status of our operations
           </p>
@@ -524,10 +526,11 @@ export default function Home() {
           <p className='text-[#000000a3]'>
           Management fee {"–"} Our clients pay Tricontinental Solutions an engagement and ongoing management fee for the services provided
           </p>
-
+          <br />
           <p className='text-[#000000a3]'>
           Cost plus model - Our clients pay Tricontinental Solutions for the cost of the product plus an agreed mark up of that cost and the costs of delivery. This approach is supported by an open book policy to allow for transparency and ease of auditability.
           </p>
+          <br />
           <p className='text-[#000000a3]'>
           Gain share {"–"} Tricontinental Solutions share the savings made on a procurement exercise with the client on a pre-agreed split basis
 
@@ -619,6 +622,153 @@ export default function Home() {
       </div>
 
   </div>
+
+  <div  className='p-8  pl-[100px]'>
+      <h2 className='font-moda text-5xl '>Clients</h2>
+      <br />
+
+      <div className='grid gap-10 grid-cols-3 items-center justify-center'>
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/worldpay.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Direct spend reduction - Led multiple sourcing and synergy activities with spend up to £140M across technology contracts (software) delivered £23M direct cost reductions
+              </p>
+
+              
+            <p className='py-1'>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Led negotiations on Global Oracle Perpetual ULA deal - <strong>$29m savings</strong>
+              </p>
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/HSBC.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Spend Optimisation - $280m 5 year deal, with major technology provider across (Hardware, software and services). 10% Year on Year cost reduction as consumption and product uptake increases ($28m)
+
+              </p>
+              <p className='py-1 text-white'>
+              {/* <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span> */}
+              Led negotiations on Global Oracle Perpetual ULA deal - <strong>$29m savings</strong>
+              </p>
+              
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/co-operative bank.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Spend Optimisation - IT Contracts separation (Risk mitigation) and Outsource, Over 700 Applications,{" >"}£100M annual spend. Delivered £3.5m in cost avoidance. Spend remained flat, Secured rights to use post divestment
+
+              </p>
+              
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/bp.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Re-negotiated key supplier contracts for retail sites across Europe <strong>saving $400k</strong> on a $3.2 million spend
+              </p>
+
+              <p className='py-1 text-white'>
+              {/* <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span> */}
+              Led negotiations on Global Oracle Perpetual ULA deal - <strong>$29m savings</strong>
+              </p>
+              
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/Shop Direct.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              10 year outsourcing contract, delivered negotiated <strong>savings of £193m</strong> off £750m as well as a warranty backed incremental sales uplift of £2.1m per annum
+
+              </p>
+
+              
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/British Airways.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Transition and transformation of the IT procurement function to an offshore service delivery model. £1.1M savings from multiple projects to deliver synergies following the BA-Iberia merger. 5 FTE headcount reduction 
+
+              </p>
+
+              
+          </div>
+
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/dhl.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Process improvement/Cost optimisation. Insourcing of a previously outsourced 3rd party Customs Declaration System resulting in 50% reduction in overheads as well as 20% increase in revenue. Key highlight is that the CDS is now preferred interface software for custom declaration in UK and DHL owns the Patent 
+              </p>
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/walt_disney.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Financial and operational improvements to drive performance and business results on Disney Order and Inventory Mgt system which ensures all systems worldwide are operable and provide real time sales, distribution and warehouse stocks.  
+
+              </p>
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+            <img src="/Jaguar.png" alt=""  className='block py-8 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              <strong>Cost reduction.</strong> Consolidation of multiple systems and planning Implementing an end to end global Strategic IT solution to enable tracking and remuneration of every vehicle and customer throughout the supply chain. 
+
+              </p>
+          </div>
+      </div>
+      <div className='grid gap-10 grid-cols-2 items-center justify-center'>
+        
+      <div  className='rounded p-4 shadow-lg'>
+            <img src="/walgreens_boots.png" alt=""  className='block py-2 '/>
+
+            <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Process improvement/Cost optimisation. Inaccurate customer data due to Multiple legacy optician systems (through M&A activities). Engaged to reduce customer complaints and save on overhead costs 
+
+              </p>
+
+              <p className='py-1 '>
+              <span className='inline-block bg-[teal] w-[10px] h-[10px] rounded-full mx-1'></span>
+              Created single global database for all optician system and introduced a more robust Azure database query system resulting in 80% reduction in customer complaints post implementation and a seamless customer experience
+              </p>
+              
+          </div>
+
+          <div  className='rounded p-4 shadow-lg'>
+          <h2 className='font-moda text-5xl '>OTHER CLIENTS INCLUDE</h2>
+         
+         <div className='grid p-8 grid-cols-3 items-center justify-center	'>
+        <img src="/wills towers.png" className='' alt="" />
+        <img src="/Direct Line.png" className='' alt="" />
+        <img src="/Fidelity international.png" className='' alt="" />
+         </div>
+              
+          </div>
+      </div>
+
+  </div>  
 
   </main>
   )
