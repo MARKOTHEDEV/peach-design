@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400;1,6..96,500;1,6..96,600;1,6..96,700;1,6..96,800;1,6..96,900&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Bellefair', serif;
+  font-family: 'Bodoni Moda', serif;
+  font-family: 'Quattrocento Sans', sans-serif;
+}
+
+
+.hero_section{
+  background-image:
+  linear-gradient(to right,rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76) ),
+  url("../../public/banner.jpg") ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
