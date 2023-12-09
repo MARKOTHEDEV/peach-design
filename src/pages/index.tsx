@@ -278,6 +278,7 @@ export default function Home() {
                  </h2>
               <p className='text-right' >
               Office Furniture, building fittings, building accessories
+              <span className='text-white'>Lorem ipsum dolor sit amet.</span>
               </p>
           </div>
 
