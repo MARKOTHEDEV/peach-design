@@ -798,7 +798,7 @@ export default function Home() {
       {/* solution values add  */}
       <div  className='p-8  pl-[100px]'>
         <br />
-        <h2 className='font-moda text-5xl text-center '>TRICONTINENTAL SOLUTIONS VALUE ADDS </h2>
+        <h2 className='font-moda text-5xl text-center '>OTB-MIDAS SOLUTIONS VALUE ADDS </h2>
         <br />
         <br />
         <br />
