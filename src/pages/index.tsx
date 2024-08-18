@@ -68,10 +68,11 @@ export default function Home() {
         {/* stuff to use */}
         <div className='font-moda px-12'>
           <h2 className=' text-3xl py-1'>DIRECT SPEND</h2>
-          <p className='font-light	text-sm text-[#000000a3] text-xl whitespace-pre-wrap'>
+          <p className='font-light	text-sm text-[#000000a3] text-xl '>
           {/* This covers all spend that is directly related to the creation or provision of an {"organisation’s"} goods or services which ultimately get sold to customers. Examples are typical raw materials for production  */}
           ctl-opt dftactgrp(*no) actgrp(*new);  // Control options
-           // Prototype of the function
+
+          // Prototype of the function
           dcl-pr CalcFuturePayments extpgm('CALCFUTPAY');
             StartDate     date;          // Input: Start Date
             NumPayments   int(10);       // Input: Number of Future Payments
