@@ -22,7 +22,7 @@ export default function Home() {
           <h2 className='font-semibold font-moda text-5xl	text-center' style={{'color':'rgb(0 0 0 / 64%)'}}>OTB Midas</h2>
         </div>
         <p className='text-center font-cento'>Delivering innovative and
-          <div></div>
+          <span></span> 
            sustainable value to your business</p>
       </div>
 
@@ -41,7 +41,7 @@ export default function Home() {
     <div className='p-8  pl-[100px]'>
       <h2 className='font-moda font-light text-5xl pb-2'>Introduction</h2>
       <p className='text-[#000000a3] text-xl text-xl'>
-      Procurement is fundamental to the effective functioning of <div></div> any organisation with third party external spend. 
+      Procurement is fundamental to the effective functioning of  <span></span>  any organisation with third party external spend. 
       </p>
     </div>
     <br />
@@ -68,8 +68,79 @@ export default function Home() {
         {/* stuff to use */}
         <div className='font-moda px-12'>
           <h2 className=' text-3xl py-1'>DIRECT SPEND</h2>
-          <p className='font-light	text-sm text-[#000000a3] text-xl'>
-          This covers all spend that is directly related to the creation or provision of an {"organisation’s"} goods or services which ultimately get sold to customers. Examples are typical raw materials for production 
+          <p className='font-light	text-sm text-[#000000a3] text-xl whitespace-pre-wrap'>
+          {/* This covers all spend that is directly related to the creation or provision of an {"organisation’s"} goods or services which ultimately get sold to customers. Examples are typical raw materials for production  */}
+          ctl-opt dftactgrp(*no) actgrp(*new);  // Control options
+           // Prototype of the function
+          dcl-pr CalcFuturePayments extpgm('CALCFUTPAY');
+            StartDate     date;          // Input: Start Date
+            NumPayments   int(10);       // Input: Number of Future Payments
+            Cycle         char(10);      // Input: Payment Cycle ('MONTHLY', 'QUARTERLY', 'HALFYEAR', 'YEARLY')
+            PaymentDates  like(StartDate) dim(100);  // Output: Array of Future Payment Dates
+          end-pr;
+
+          // Main program
+
+          dcl-s StartDateCCYYMMDD char(8) inz('20240818');  // Start date in CCYYMMDD format
+          dcl-s StartDate date;                             // Date variable for converted start date
+          dcl-s NumPayments int(10) inz(5);                 // Request 5 future payments
+          dcl-s Cycle char(10) inz('QUARTERLY');            // Quarterly payment cycle
+          dcl-s PaymentDates date dim(100);                 // Array to store the result
+          dcl-s i int(10);                                  // Loop index
+
+          // Convert CCYYMMDD string to date type
+          StartDate = %date(%subst(StartDateCCYYMMDD:1:4) + '-' +
+                            %subst(StartDateCCYYMMDD:5:2) + '-' +
+                            %subst(StartDateCCYYMMDD:7:2));
+
+          // Call the function
+          callp CalcFuturePayments(StartDate : NumPayments : Cycle : PaymentDates);
+
+          // Display the future payment dates
+          for i = 1 to NumPayments;
+            dsply ('Payment ' + %char(i) + ': ' + %char(PaymentDates(i)));
+          endfor;
+
+          *inlr = *on;
+
+          // Procedure definition for CalcFuturePayments
+
+          dcl-proc CalcFuturePayments;
+
+            dcl-pi *n;
+              StartDate     date;          // Input: Start Date
+              NumPayments   int(10);       // Input: Number of Future Payments
+              Cycle         char(10);      // Input: Payment Cycle ('MONTHLY', 'QUARTERLY', 'HALFYEAR', 'YEARLY')
+              PaymentDates  like(StartDate) dim(100);  // Output: Array of Future Payment Dates
+            end-pi;
+
+            dcl-s FutureDate date;                // Working variable for future dates
+            dcl-s PaymentIndex int(10) inz(1);    // Index for output date array
+            dcl-s i int(10);                      // Loop index
+
+            FutureDate = StartDate;  // Initialize future date with the start date
+
+            for i = 1 to NumPayments;
+
+              select;
+                when Cycle = 'MONTHLY';
+                  FutureDate = %adddur(FutureDate: 1: *months);
+                when Cycle = 'QUARTERLY';
+                  FutureDate = %adddur(FutureDate: 3: *months);
+                when Cycle = 'HALFYEAR';
+                  FutureDate = %adddur(FutureDate: 6: *months);
+                when Cycle = 'YEARLY';
+                  FutureDate = %adddur(FutureDate: 1: *years);
+                other;
+                  // Handle invalid cycle input if needed
+              endsl;
+
+              PaymentDates(PaymentIndex) = FutureDate;
+              PaymentIndex += 1;
+
+            endfor;
+
+          end-proc;
           </p>
         </div>
 
@@ -77,7 +148,6 @@ export default function Home() {
           <h2 className=' text-3xl py-1'>INDIRECT SPEND</h2>
           <p className='font-light	text-sm text-[#000000a3] text-xl'>
           This covers all spend that is not core to the production of an {"organization's"} goods or services but are required to for running the business. Examples include computers, software, IT support, HR, Office suppliers, uniforms etc.
-
           </p>
         </div>
       </div>
@@ -408,9 +478,7 @@ export default function Home() {
                 <MdOutlineHomeRepairService />
               </div>
               <p className='leading-relaxed '>
-              A single point of contact for receiving and fulfilling all approved in-scope purchase requests
-
-              </p>
+              A single point of contact for receiving and fulfilling all approved in-scope purchase requests </p>
             </div>
             
             <div className='flex gap-5 items-center'>
