@@ -812,74 +812,74 @@ export default function Home() {
         <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
           <code>
             {`
-          ctl-opt dftactgrp(*no) actgrp(*new);  // Control options
+          H DFTACTGRP(*NO) ACTGRP(*NEW)                                 
 
-          // Prototype of the function
-          dcl-pr CalcFuturePayments extpgm('CALCFUTPAY');
-            StartDate     date;          // Input: Start Date
-            NumPayments   int(10);       // Input: Number of Future Payments
-            Cycle         char(10);      // Input: Payment Cycle ('MONTHLY', 'QUARTERLY', 'HALFYEAR', 'YEARLY')
-            PaymentDates  like(StartDate) dim(100);  // Output: Array of Future Payment Dates
-          end-pr;
+          D CalcFuturePayments...
+          D                 PR                                    
+          D   StartDate                   D                        
+          D   NumPayments                 10I 0                    
+          D   Cycle                       10A                      
+          D   PaymentDates                D       DIM(100)         
 
-          // Main program
-          dcl-s StartDateCCYYMMDD char(8) inz('20240818');  // Start date in CCYYMMDD format
-          dcl-s StartDate date;                             // Date variable for converted start date
-          dcl-s NumPayments int(10) inz(5);                 // Request 5 future payments
-          dcl-s Cycle char(10) inz('QUARTERLY');            // Quarterly payment cycle
-          dcl-s PaymentDates date dim(100);                 // Array to store the result
-          dcl-s i int(10);                                  // Loop index
+          D CalcFuturePayments...
+          D                 PI                                    
+          D   StartDate                   D                        
+          D   NumPayments                 10I 0                    
+          D   Cycle                       10A                      
+          D   PaymentDates                D       DIM(100)         
 
-          // Convert CCYYMMDD string to date type
-          StartDate = %date(%subst(StartDateCCYYMMDD:1:4) + '-' +
-                            %subst(StartDateCCYYMMDD:5:2) + '-' +
-                            %subst(StartDateCCYYMMDD:7:2));
+          D FutureDate      S               D                      
+          D PaymentIndex    S             10I 0 INZ(1)             
+          D i               S             10I 0                    
 
-          // Call the function
-          callp CalcFuturePayments(StartDate : NumPayments : Cycle : PaymentDates);
+          D StartDateCCYYMMDD S            8A   INZ('20240818')    
+          D StartDate      S               D                      
+          D PaymentDates   S               D       DIM(100)        
+          D NumPayments    S             10I 0 INZ(5)              
+          D Cycle          S             10A   INZ('QUARTERLY')    
 
-          // Display the future payment dates
-          for i = 1 to NumPayments;
-            dsply ('Payment ' + %char(i) + ': ' + %char(PaymentDates(i)));
-          endfor;
+          C     *ENTRY        PLIST                                 
+          C                   PARM                    StartDate      
+          C                   PARM                    NumPayments    
+          C                   PARM                    Cycle          
+          C                   PARM                    PaymentDates   
 
-          *inlr = *on;
+          C     StartDateCCYYMMDD DS                                             
+          C                   SUBST(StartDateCCYYMMDD:1:4)     Year              
+          C                   SUBST(StartDateCCYYMMDD:5:2)     Month             
+          C                   SUBST(StartDateCCYYMMDD:7:2)     Day               
+          C                   EVAL      StartDate = %DATE(Year + '-' + Month + '-'+ Day)
 
-          // Procedure definition for CalcFuturePayments
-          dcl-proc CalcFuturePayments;
-            dcl-pi *n;
-              StartDate     date;          // Input: Start Date
-              NumPayments   int(10);       // Input: Number of Future Payments
-              Cycle         char(10);      // Input: Payment Cycle ('MONTHLY', 'QUARTERLY', 'HALFYEAR', 'YEARLY')
-              PaymentDates  like(StartDate) dim(100);  // Output: Array of Future Payment Dates
-            end-pi;
+          C                   EVAL      FutureDate = StartDate
 
-            dcl-s FutureDate date;                // Working variable for future dates
-            dcl-s PaymentIndex int(10) inz(1);    // Index for output date array
-            dcl-s i int(10);                      // Loop index
+          C     FOR           i = 1 TO NumPayments
 
-            FutureDate = StartDate;  // Initialize future date with the start date
+          C                   SELECT                                    
+          C                   WHEN       Cycle = 'MONTHLY'              
+          C                   EVAL      FutureDate = %ADDDUR(FutureDate:1:*MONTHS)
+          C                   WHEN       Cycle = 'QUARTERLY'            
+          C                   EVAL      FutureDate = %ADDDUR(FutureDate:3:*MONTHS)
+          C                   WHEN       Cycle = 'HALFYEAR'             
+          C                   EVAL      FutureDate = %ADDDUR(FutureDate:6:*MONTHS)
+          C                   WHEN       Cycle = 'YEARLY'               
+          C                   EVAL      FutureDate = %ADDDUR(FutureDate:1:*YEARS)
+          C                   ENDSL                                      
 
-            for i = 1 to NumPayments;
-              select;
-                when Cycle = 'MONTHLY';
-                  FutureDate = %adddur(FutureDate: 1: *months);
-                when Cycle = 'QUARTERLY';
-                  FutureDate = %adddur(FutureDate: 3: *months);
-                when Cycle = 'HALFYEAR';
-                  FutureDate = %adddur(FutureDate: 6: *months);
-                when Cycle = 'YEARLY';
-                  FutureDate = %adddur(FutureDate: 1: *years);
-                other;
-                  // Handle invalid cycle input if needed
-              endsl;
-              
-              PaymentDates(PaymentIndex) = FutureDate;
-              PaymentIndex += 1;
+          C                   EVAL      PaymentDates(PaymentIndex) = FutureDate
+          C                   EVAL      PaymentIndex = PaymentIndex + 1
 
-            endfor;
-          end-proc;
-            `}
+          C                   ENDFOR                                    
+
+          C                   RETURN                                    
+
+          C                   *INLR = *ON                               
+
+          C                   DSPLY     'Payment 1:' + %CHAR(PaymentDates(1))
+          C                   DSPLY     'Payment 2:' + %CHAR(PaymentDates(2))
+          C                   DSPLY     'Payment 3:' + %CHAR(PaymentDates(3))
+          C                   DSPLY     'Payment 4:' + %CHAR(PaymentDates(4))
+          C                   DSPLY     'Payment 5:' + %CHAR(PaymentDates(5))
+          `}
           </code>
         </pre>
       </div>
