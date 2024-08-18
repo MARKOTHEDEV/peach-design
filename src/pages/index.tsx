@@ -68,80 +68,8 @@ export default function Home() {
         {/* stuff to use */}
         <div className='font-moda px-12'>
           <h2 className=' text-3xl py-1'>DIRECT SPEND</h2>
-          <p className='font-light	text-sm text-[#000000a3] text-xl whitespace-pre-wrap'>
-          {/* This covers all spend that is directly related to the creation or provision of an {"organisation’s"} goods or services which ultimately get sold to customers. Examples are typical raw materials for production  */}
-              ctl-opt dftactgrp(*no) actgrp(*new);  // Control options
-
-              // Prototype of the function
-              dcl-pr CalcFuturePayments extpgm('CALCFUTPAY');
-                StartDate     date;          // Input: Start Date
-                NumPayments   int(10);       // Input: Number of Future Payments
-                Cycle         char(10);      // Input: Payment Cycle ('MONTHLY', 'QUARTERLY', 'HALFYEAR', 'YEARLY')
-                PaymentDates  like(StartDate) dim(100);  // Output: Array of Future Payment Dates
-              end-pr;
-
-              // Main program
-
-              dcl-s StartDateCCYYMMDD char(8) inz('20240818');  // Start date in CCYYMMDD format
-              dcl-s StartDate date;                             // Date variable for converted start date
-              dcl-s NumPayments int(10) inz(5);                 // Request 5 future payments
-              dcl-s Cycle char(10) inz('QUARTERLY');            // Quarterly payment cycle
-              dcl-s PaymentDates date dim(100);                 // Array to store the result
-              dcl-s i int(10);                                  // Loop index
-
-              // Convert CCYYMMDD string to date type
-              StartDate = %date(%subst(StartDateCCYYMMDD:1:4) + '-' +
-                                %subst(StartDateCCYYMMDD:5:2) + '-' +
-                                %subst(StartDateCCYYMMDD:7:2));
-
-              // Call the function
-              callp CalcFuturePayments(StartDate : NumPayments : Cycle : PaymentDates);
-
-              // Display the future payment dates
-              for i = 1 to NumPayments;
-                dsply ('Payment ' + %char(i) + ': ' + %char(PaymentDates(i)));
-              endfor;
-
-              *inlr = *on;
-
-              // Procedure definition for CalcFuturePayments
-
-              dcl-proc CalcFuturePayments;
-
-                dcl-pi *n;
-                  StartDate     date;          // Input: Start Date
-                  NumPayments   int(10);       // Input: Number of Future Payments
-                  Cycle         char(10);      // Input: Payment Cycle ('MONTHLY', 'QUARTERLY', 'HALFYEAR', 'YEARLY')
-                  PaymentDates  like(StartDate) dim(100);  // Output: Array of Future Payment Dates
-                end-pi;
-
-                dcl-s FutureDate date;                // Working variable for future dates
-                dcl-s PaymentIndex int(10) inz(1);    // Index for output date array
-                dcl-s i int(10);                      // Loop index
-
-                FutureDate = StartDate;  // Initialize future date with the start date
-
-                for i = 1 to NumPayments;
-
-                  select;
-                    when Cycle = 'MONTHLY';
-                      FutureDate = %adddur(FutureDate: 1: *months);
-                    when Cycle = 'QUARTERLY';
-                      FutureDate = %adddur(FutureDate: 3: *months);
-                    when Cycle = 'HALFYEAR';
-                      FutureDate = %adddur(FutureDate: 6: *months);
-                    when Cycle = 'YEARLY';
-                      FutureDate = %adddur(FutureDate: 1: *years);
-                    other;
-                      // Handle invalid cycle input if needed
-                  endsl;
-
-                  PaymentDates(PaymentIndex) = FutureDate;
-                  PaymentIndex += 1;
-
-                endfor;
-
-              end-proc;
+          <p className='font-light	text-sm text-[#000000a3] text-xl'>
+          This covers all spend that is directly related to the creation or provision of an {"organisation’s"} goods or services which ultimately get sold to customers. Examples are typical raw materials for production 
           </p>
         </div>
 
