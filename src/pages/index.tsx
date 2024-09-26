@@ -802,7 +802,7 @@ export default function Home() {
         <br />
         <div>
           <img src="/big2.png" className='block h-full w-full' alt="" />
-        </div>
+      </div>
       </div>
       {/* end solution value adds */}
   </main>
