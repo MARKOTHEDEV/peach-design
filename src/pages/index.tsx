@@ -804,7 +804,7 @@ export default function Home() {
           <img src="/big2.png" className='block h-full w-full' alt="" />
         </div>
       </div>
-      {/* end solution valu add  */}
+      {/* end solution value adds */}
   </main>
   )
 }
