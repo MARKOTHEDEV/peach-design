@@ -805,6 +805,122 @@ export default function Home() {
       </div>
       </div>
       {/* end solution value adds */}
+        <div className="p-8 pl-[100px]">
+    <h2 className="font-moda text-5xl">Code</h2>
+    <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
+      <code>
+              {`
+        A          R LAMORTLP
+        A            PORTFOLIO             10A
+        A            FACILITY_TYPE          2A
+        A            DATE                   L
+        A            MORTGAGE_TYPE          3A
+        A            LIMIT_REDUCTION_DATE   L
+        A            FACILITY_REPAY_AMT    15P 2
+        A            NEW_FACILITY_LIMIT    15P 2
+        A            SCHEDULE_TYPE          1A
+        A            USERID                10A
+        A            PROGRAM               10A
+        A            DATE_LAST_AMENDED      L
+        A            TIME_LAST_AMENDED      T
+        A          K PORTFOLIO
+
+        A          R LAMORTL1                   PFILE(LAMORTOP)
+        A          S STATUS                     COMP(EQ 'L')
+        A          S AMORT_SCHEDULE             COMP(EQ 'S')
+        A          K NEXT_REPAYMENT_DATE
+        A          K PORTFOLIO
+
+        A          R LAMORTL2                   PFILE(LAMORTOP)
+        A          S STATUS                     COMP(EQ 'L')
+        A          S AMORT_SCHEDULE             COMP(EQ 'A')
+        A          K PORTFOLIO
+
+        A          R LAMORTL3                   PFILE(LAMORTOP)
+        A          S STATUS                     COMP(EQ 'L')
+        A          S AMORT_SCHEDULE             COMP(EQ 'B')
+        A          K PORTFOLIO
+
+        PGM
+
+        DCLF       FILE(UDAYENDP)
+        DCL        VAR(&BUSINESS_DATE) TYPE(*CHAR) LEN(8)
+
+        RCVF                                       
+        MONMSG     MSGID(CPF0864) EXEC(GOTO CMDLBL(ERROR))
+
+        CHGVAR     VAR(&BUSINESS_DATE) VALUE(&UD_BUS_DATE)
+
+        CALL       PGM(LMG500AR) PARM(&BUSINESS_DATE)
+        MONMSG     MSGID(CPF0000) EXEC(DO)
+          SNDPGMMSG  MSG('Error calling LMG500AR') TOUSR(*SYSOPR)
+          GOTO       CMDLBL(ERROR)
+        ENDDO
+
+        CALL       PGM(LMG500BR) PARM(&BUSINESS_DATE)
+        MONMSG     MSGID(CPF0000) EXEC(DO)
+          SNDPGMMSG  MSG('Error calling LMG500BR') TOUSR(*SYSOPR)
+          GOTO       CMDLBL(ERROR)
+        ENDDO
+
+        RETURN
+
+        ERROR:
+        SNDPGMMSG  MSG('Error occurred in LMG500A') TOUSR(*SYSOPR)
+        ENDPGM
+
+        **free
+        dcl-pi *n;
+          BusinessDate char(8);
+        end-pi;
+
+        dcl-f LAMORTOP1 DISK KEYED USAGE(*INPUT) PREFIX(LAM_);
+        dcl-f LSGDFTOP  DISK KEYED USAGE(*UPDATE) PREFIX(LSG_);
+        dcl-f LAMORTLP  DISK USAGE(*OUTPUT) PREFIX(LP_);
+
+        dcl-s WkRepayAmt packed(15:2) inz(0);
+        dcl-s i int(10);
+        dcl-s Found char(1);
+
+        setll (BusinessDate) LAMORTOP1;
+        reade (BusinessDate) LAMORTOP1;
+        dow not %eof(LAMORTOP1);
+
+          if LAM_SuppressNextRepay <> 'N';
+              chain (LAM_Portfolio) LSGDFTOP;
+              if %found and LSG_StepdownFlag = 'Y' and LSG_MortgageType = 'CS';
+                WkRepayAmt = LAM_RepaymentAmount;
+                exsr LimitReduction;
+              endif;
+          endif;
+
+          reade (BusinessDate) LAMORTOP1;
+        enddo;
+
+        begsr LimitReduction;
+          LP_Portfolio              = LAM_Portfolio;
+          LP_Facility_Type          = 'MG';
+          LP_Date                   = %date();
+          LP_Mortgage_Type          = 'CS';
+          LP_Limit_Reduction_Date   = %date(BusinessDate:*ISO);
+          LP_Facility_Repay_Amt     = WkRepayAmt;
+          LP_New_Facility_Limit     = LSG_CurrentFacilityAmt - WkRepayAmt;
+          LP_Schedule_Type          = LAM_AmortSchedule;
+          write LAMORTLP;
+          LSG_AvailableFacilityAmt = LSG_CurrentFacilityAmt - WkRepayAmt;
+          LSG_UserID               = 'LMG500AR';
+          LSG_Program              = 'LMG500AR';
+          LSG_Date_Last_Amended    = %date();
+          LSG_Time_Last_Amended    = %time();
+          update LSGDFTOP;
+        endsr;
+
+        *inlr = *on;
+              `}
+            </code>
+          </pre>
+        </div>
+
   </main>
   )
 }
