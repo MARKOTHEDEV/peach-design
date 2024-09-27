@@ -805,11 +805,12 @@ export default function Home() {
       </div>
       </div>
       {/* end solution value adds */}
-        <div className="p-8 pl-[100px]">
-    <h2 className="font-moda text-5xl">Code</h2>
-    <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
-      <code>
+      <div className="p-8 pl-[100px]">
+      <h2 className="font-moda text-5xl">Code</h2>
+      <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
+            <code>
               {`
+              /* 1. Create Physical File (PF) LAMORTLP */
         A          R LAMORTLP
         A            PORTFOLIO             10A
         A            FACILITY_TYPE          2A
@@ -825,32 +826,42 @@ export default function Home() {
         A            TIME_LAST_AMENDED      T
         A          K PORTFOLIO
 
+              /* 2. Create Logical Files over LAMORTOP */
+              /* For Amortisation Schedule = 'S' (Standard): */
         A          R LAMORTL1                   PFILE(LAMORTOP)
         A          S STATUS                     COMP(EQ 'L')
         A          S AMORT_SCHEDULE             COMP(EQ 'S')
         A          K NEXT_REPAYMENT_DATE
         A          K PORTFOLIO
 
+              /* For Amortisation Schedule = 'A' (Adhoc): */
         A          R LAMORTL2                   PFILE(LAMORTOP)
         A          S STATUS                     COMP(EQ 'L')
         A          S AMORT_SCHEDULE             COMP(EQ 'A')
         A          K PORTFOLIO
 
+              /* For Amortisation Schedule = 'B' (Both): */
         A          R LAMORTL3                   PFILE(LAMORTOP)
         A          S STATUS                     COMP(EQ 'L')
         A          S AMORT_SCHEDULE             COMP(EQ 'B')
         A          K PORTFOLIO
 
+              /* 3. Create Logical Files over LAMUBSOP */
+              /* Similar to the above logical files but over LAMUBSOP instead of LAMORTOP. */
+
+              /* 4. CL Program LMG500A */
         PGM
 
         DCLF       FILE(UDAYENDP)
         DCL        VAR(&BUSINESS_DATE) TYPE(*CHAR) LEN(8)
 
-        RCVF                                       
+        /* Retrieve current business date */
+        RCVF
         MONMSG     MSGID(CPF0864) EXEC(GOTO CMDLBL(ERROR))
 
         CHGVAR     VAR(&BUSINESS_DATE) VALUE(&UD_BUS_DATE)
 
+        /* Call RPGLE programs */
         CALL       PGM(LMG500AR) PARM(&BUSINESS_DATE)
         MONMSG     MSGID(CPF0000) EXEC(DO)
           SNDPGMMSG  MSG('Error calling LMG500AR') TOUSR(*SYSOPR)
@@ -869,7 +880,10 @@ export default function Home() {
         SNDPGMMSG  MSG('Error occurred in LMG500A') TOUSR(*SYSOPR)
         ENDPGM
 
+              /* 5. RPGLE Program LMG500AR */
         **free
+        // Program to apply limit reductions for CS Mortgages
+
         dcl-pi *n;
           BusinessDate char(8);
         end-pi;
@@ -882,6 +896,7 @@ export default function Home() {
         dcl-s i int(10);
         dcl-s Found char(1);
 
+        // Process Standard Schedule
         setll (BusinessDate) LAMORTOP1;
         reade (BusinessDate) LAMORTOP1;
         dow not %eof(LAMORTOP1);
@@ -897,7 +912,12 @@ export default function Home() {
           reade (BusinessDate) LAMORTOP1;
         enddo;
 
+        // Process Adhoc Schedule
+        // Similar logic for Adhoc and Both schedules...
+
+        // Limit Reduction Subroutine
         begsr LimitReduction;
+
           LP_Portfolio              = LAM_Portfolio;
           LP_Facility_Type          = 'MG';
           LP_Date                   = %date();
@@ -906,16 +926,22 @@ export default function Home() {
           LP_Facility_Repay_Amt     = WkRepayAmt;
           LP_New_Facility_Limit     = LSG_CurrentFacilityAmt - WkRepayAmt;
           LP_Schedule_Type          = LAM_AmortSchedule;
+
           write LAMORTLP;
+
           LSG_AvailableFacilityAmt = LSG_CurrentFacilityAmt - WkRepayAmt;
           LSG_UserID               = 'LMG500AR';
           LSG_Program              = 'LMG500AR';
           LSG_Date_Last_Amended    = %date();
           LSG_Time_Last_Amended    = %time();
+
           update LSGDFTOP;
         endsr;
 
         *inlr = *on;
+
+              /* 6. RPGLE Program LMG500BR */
+              /* This program will be similar to LMG500AR but will process UBS Mortgages instead of CS. Adjust the mortgage type checks and file names accordingly. */
               `}
             </code>
           </pre>
