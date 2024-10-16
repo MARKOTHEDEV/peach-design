@@ -805,6 +805,209 @@ export default function Home() {
       </div>
       </div>
       {/* end solution value adds */}
+      <div className="p-8 pl-[100px]">
+  <h2 className="font-moda text-5xl">Code</h2>
+  <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
+    <code>
+      {`
+        dcl-f myFile keyed; // Define file to display content from
+        dcl-f mySubfile usage(*input : *output) keyed; // Subfile definition
+
+        dcl-ds sflControlField;
+          rrn int(5); // Subfile RRN (Relative Record Number)
+          sflSize int(5) inz(10); // Subfile size
+          sflPage int(5) inz(10); // Subfile page size
+        end-ds;
+
+        dcl-ds myRecordDS; // Data structure for records
+          keyField char(10);
+          description char(50);
+        end-ds;
+
+        * Main Program Logic *
+
+        // Load subfile with records from the file
+        callp loadSubfile(); 
+
+        // Display the subfile screen
+        exfmt screenDisplay; 
+
+        * Main Loop to Handle User Input *
+        dow inputOption <> 'F3'; // Exit loop on F3
+
+          // Get user's selection from the subfile
+          select; 
+
+            when inputOption = '5'; // Option 5: View output
+              chain keyField myFile;
+              if %found(myFile);
+                dsply ('Viewing: ' + keyField + ' - ' + description);
+              else;
+                dsply ('Record not found.');
+              endif;
+
+            when inputOption = '4'; // Option 4: Delete record
+              chain keyField myFile;
+              if %found(myFile);
+                delete myFile;
+                dsply ('Record deleted: ' + keyField);
+                // Reload subfile after delete
+                callp loadSubfile();
+              else;
+                dsply ('Record not found, cannot delete.');
+              endif;
+
+            other;
+              dsply ('Invalid option, please try again.');
+
+          endsl;
+
+          // Re-display the subfile after user action
+          exfmt screenDisplay;
+
+        enddo; // End of main loop
+
+        * Load Subfile Procedure *
+
+        dcl-proc loadSubfile;
+          clear rrn;
+          read myFile;
+
+          // Load records into subfile
+          dow not %eof(myFile);
+            rrn += 1;
+            write mySubfile;
+            read myFile;
+          enddo;
+
+          exsr updateControlField; // Update subfile control fields
+        end-proc;
+
+        * Update Subfile Control Fields *
+
+        dcl-proc updateControlField;
+          sflSize = rrn;
+          sflPage = 10;
+          write controlRecord; // Write control record to subfile display
+        end-proc;
+
+        * Define Files, Subfile, and Data Structures *
+
+        dcl-f myFile keyed; // Define file to display content from
+        dcl-f mySubfile usage(*input : *output) keyed; // Subfile definition
+
+        dcl-ds sflControlField;
+          rrn int(5); // Subfile RRN (Relative Record Number)
+          sflSize int(5) inz(10); // Subfile size
+          sflPage int(5) inz(10); // Subfile page size
+        end-ds;
+
+        dcl-ds mySubfileDS; // Data structure for subfile (6-8 fields)
+          keyField char(10);
+          field1 char(20);
+          field2 char(30);
+          field3 char(20);
+          field4 char(15);
+          field5 char(10);
+          // ... Additional fields for concise display
+        end-ds;
+
+        dcl-ds myFullRecordDS; // Data structure for full 20 fields
+          keyField char(10);
+          field1 char(20);
+          field2 char(30);
+          field3 char(20);
+          field4 char(15);
+          field5 char(10);
+          // ... Continue defining all 20 fields
+        end-ds;
+
+        * Main Program Logic *
+
+        // Load subfile with records from the file
+        callp loadSubfile(); 
+
+        // Display the subfile screen
+        exfmt screenDisplay; 
+
+        * Main Loop to Handle User Input *
+        dow inputOption <> 'F3'; // Exit loop on F3
+
+          // Get user's selection from the subfile
+          select; 
+
+            when inputOption = '5'; // Option 5: View output (20 fields)
+              chain keyField myFile;
+              if %found(myFile);
+                callp displayFullRecord(); // Show all 20 fields
+              else;
+                dsply ('Record not found.');
+              endif;
+
+            // Additional options (e.g., delete) can be handled here
+
+            other;
+              dsply ('Invalid option, please try again.');
+
+          endsl;
+
+          // Re-display the subfile after user action
+          exfmt screenDisplay;
+
+        enddo; // End of main loop
+
+        * Load Subfile Procedure (6-8 fields) *
+
+        dcl-proc loadSubfile;
+          clear rrn;
+          read myFile;
+
+          // Load 6-8 fields into subfile
+          dow not %eof(myFile);
+            rrn += 1;
+            // Map the 6-8 fields to subfile display
+            mySubfileDS.keyField = myFile.keyField;
+            mySubfileDS.field1 = myFile.field1;
+            mySubfileDS.field2 = myFile.field2;
+            // Map other fields as needed...
+
+            write mySubfile;
+            read myFile;
+          enddo;
+
+          exsr updateControlField; // Update subfile control fields
+        end-proc;
+
+        * Display Full Record (20 fields) Procedure *
+
+        dcl-proc displayFullRecord;
+          // Chain the record and display all 20 fields on a separate format
+          chain keyField myFile;
+          if %found(myFile);
+            // Map the full 20 fields from the file to a display format
+            myFullRecordDS.keyField = myFile.keyField;
+            myFullRecordDS.field1 = myFile.field1;
+            myFullRecordDS.field2 = myFile.field2;
+            // ... Map remaining fields (total 20 fields)
+
+            exfmt fullRecordDisplay; // Display full record screen
+          else;
+            dsply ('Record not found.');
+          endif;
+        end-proc;
+
+        * Update Subfile Control Fields *
+
+        dcl-proc updateControlField;
+          sflSize = rrn;
+          sflPage = 10;
+          write controlRecord; // Write control record to subfile display
+        end-proc;
+      `}
+    </code>
+  </pre>
+</div>
+
   </main>
   )
 }
