@@ -805,7 +805,7 @@ export default function Home() {
       </div>
       </div>
       {/* end solution value adds */}
-      <div className="p-8 pl-[100px]">
+      {/* <div className="p-8 pl-[100px]">
   <h2 className="font-moda text-5xl">Code</h2>
   <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
     <code>
@@ -1006,7 +1006,7 @@ export default function Home() {
       `}
     </code>
   </pre>
-</div>
+</div> */}
 
   </main>
   )
