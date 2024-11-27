@@ -804,210 +804,109 @@ export default function Home() {
           <img src="/big2.png" className='block h-full w-full' alt="" />
       </div>
       </div>
-      {/* end solution value adds */}
-      {/* <div className="p-8 pl-[100px]">
-  <h2 className="font-moda text-5xl">Code</h2>
-  <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
-    <code>
-      {`
-        dcl-f myFile keyed; // Define file to display content from
-        dcl-f mySubfile usage(*input : *output) keyed; // Subfile definition
 
-        dcl-ds sflControlField;
-          rrn int(5); // Subfile RRN (Relative Record Number)
-          sflSize int(5) inz(10); // Subfile size
-          sflPage int(5) inz(10); // Subfile page size
-        end-ds;
+  <div className="p-8 pl-[100px]">
+    <h2 className="font-moda text-5xl">Code</h2>
+    <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
+      <code>
+        {`
+          A* Subfile Record Format
+      A          R SFL                       SFL
+      A            FOLD_IND       1A  H
+      A            COL1          10A  O  2  2
+      A            COL2          10A  O  2 14
+      A            COL3          10A  O  2 26
+      A            COL4          10A  H
+      A            COL5          10A  H
+      A            COL6          10A  H
+      A            COL7          10A  H
+      A            COL8          10A  H
 
-        dcl-ds myRecordDS; // Data structure for records
-          keyField char(10);
-          description char(50);
-        end-ds;
+      A* Subfile Control Format
+      A          R SFLCTL                   SFLCTL(SFL)
+      A                                      SFLSIZ(9999)
+      A                                      SFLPAG(10)
+      A                                      OVERLAY
+      A  25                                  SFLCLR
+      A  26                                  SFLDSP
+      A  27                                  SFLDSPCTL
+      A            HEADER1       10A  O  1  2
+      A            HEADER2       10A  O  1 14
+      A            HEADER3       10A  O  1 26
+      A            HEADER4       10A  O  3  2
+      A            HEADER5       10A  O  3 14
+      A            HEADER6       10A  O  3 26
+      A            HEADER7       10A  O  3 38
+      A            HEADER8       10A  O  3 50
+      A            CMD_KEY        1A  B  1 70CHECK(LC)
 
-        * Main Program Logic *
+      fSUBFILE    CF   E             WORKSTN
 
-        // Load subfile with records from the file
-        callp loadSubfile(); 
+      d FOLD_IND       s              1A
+      d CMD_KEY        s              1A
+      d RRN            s              4S 0
 
-        // Display the subfile screen
-        exfmt screenDisplay; 
+      /free
+        // Initialize headers
+        HEADER1 = 'Col 1';
+        HEADER2 = 'Col 2';
+        HEADER3 = 'Col 3';
+        HEADER4 = 'Col 4';
+        HEADER5 = 'Col 5';
+        HEADER6 = 'Col 6';
+        HEADER7 = 'Col 7';
+        HEADER8 = 'Col 8';
 
-        * Main Loop to Handle User Input *
-        dow inputOption <> 'F3'; // Exit loop on F3
+        // Populate subfile data
+        RRN = 1;
 
-          // Get user's selection from the subfile
-          select; 
+        // Add a few sample rows
+        FOLD_IND = '0'; // Folded by default
 
-            when inputOption = '5'; // Option 5: View output
-              chain keyField myFile;
-              if %found(myFile);
-                dsply ('Viewing: ' + keyField + ' - ' + description);
-              else;
-                dsply ('Record not found.');
-              endif;
+        COL1 = 'Row1-C1';
+        COL2 = 'Row1-C2';
+        COL3 = 'Row1-C3';
+        COL4 = 'Row1-C4';
+        COL5 = 'Row1-C5';
+        COL6 = 'Row1-C6';
+        COL7 = 'Row1-C7';
+        COL8 = 'Row1-C8';
+        WRITE SFL;
 
-            when inputOption = '4'; // Option 4: Delete record
-              chain keyField myFile;
-              if %found(myFile);
-                delete myFile;
-                dsply ('Record deleted: ' + keyField);
-                // Reload subfile after delete
-                callp loadSubfile();
-              else;
-                dsply ('Record not found, cannot delete.');
-              endif;
+        RRN += 1;
 
-            other;
-              dsply ('Invalid option, please try again.');
+        COL1 = 'Row2-C1';
+        COL2 = 'Row2-C2';
+        COL3 = 'Row2-C3';
+        COL4 = 'Row2-C4';
+        COL5 = 'Row2-C5';
+        COL6 = 'Row2-C6';
+        COL7 = 'Row2-C7';
+        COL8 = 'Row2-C8';
+        WRITE SFL;
 
-          endsl;
+        // Display subfile in loop
+        DOW NOT *IN03;
+            WRITE SFLCTL;
+            EXFMT SFLCTL;
 
-          // Re-display the subfile after user action
-          exfmt screenDisplay;
+            SELECT;
+              WHEN CMD_KEY = '1'; // Toggle to expanded view
+                  FOLD_IND = '1'; // Enable all columns
+              WHEN CMD_KEY = '2'; // Toggle to folded view
+                  FOLD_IND = '0'; // Show only primary columns
+              OTHER;
+                  LEAVE;
+            ENDSELECT;
+        ENDDO;
 
-        enddo; // End of main loop
-
-        * Load Subfile Procedure *
-
-        dcl-proc loadSubfile;
-          clear rrn;
-          read myFile;
-
-          // Load records into subfile
-          dow not %eof(myFile);
-            rrn += 1;
-            write mySubfile;
-            read myFile;
-          enddo;
-
-          exsr updateControlField; // Update subfile control fields
-        end-proc;
-
-        * Update Subfile Control Fields *
-
-        dcl-proc updateControlField;
-          sflSize = rrn;
-          sflPage = 10;
-          write controlRecord; // Write control record to subfile display
-        end-proc;
-
-        * Define Files, Subfile, and Data Structures *
-
-        dcl-f myFile keyed; // Define file to display content from
-        dcl-f mySubfile usage(*input : *output) keyed; // Subfile definition
-
-        dcl-ds sflControlField;
-          rrn int(5); // Subfile RRN (Relative Record Number)
-          sflSize int(5) inz(10); // Subfile size
-          sflPage int(5) inz(10); // Subfile page size
-        end-ds;
-
-        dcl-ds mySubfileDS; // Data structure for subfile (6-8 fields)
-          keyField char(10);
-          field1 char(20);
-          field2 char(30);
-          field3 char(20);
-          field4 char(15);
-          field5 char(10);
-          // ... Additional fields for concise display
-        end-ds;
-
-        dcl-ds myFullRecordDS; // Data structure for full 20 fields
-          keyField char(10);
-          field1 char(20);
-          field2 char(30);
-          field3 char(20);
-          field4 char(15);
-          field5 char(10);
-          // ... Continue defining all 20 fields
-        end-ds;
-
-        * Main Program Logic *
-
-        // Load subfile with records from the file
-        callp loadSubfile(); 
-
-        // Display the subfile screen
-        exfmt screenDisplay; 
-
-        * Main Loop to Handle User Input *
-        dow inputOption <> 'F3'; // Exit loop on F3
-
-          // Get user's selection from the subfile
-          select; 
-
-            when inputOption = '5'; // Option 5: View output (20 fields)
-              chain keyField myFile;
-              if %found(myFile);
-                callp displayFullRecord(); // Show all 20 fields
-              else;
-                dsply ('Record not found.');
-              endif;
-
-            // Additional options (e.g., delete) can be handled here
-
-            other;
-              dsply ('Invalid option, please try again.');
-
-          endsl;
-
-          // Re-display the subfile after user action
-          exfmt screenDisplay;
-
-        enddo; // End of main loop
-
-        * Load Subfile Procedure (6-8 fields) *
-
-        dcl-proc loadSubfile;
-          clear rrn;
-          read myFile;
-
-          // Load 6-8 fields into subfile
-          dow not %eof(myFile);
-            rrn += 1;
-            // Map the 6-8 fields to subfile display
-            mySubfileDS.keyField = myFile.keyField;
-            mySubfileDS.field1 = myFile.field1;
-            mySubfileDS.field2 = myFile.field2;
-            // Map other fields as needed...
-
-            write mySubfile;
-            read myFile;
-          enddo;
-
-          exsr updateControlField; // Update subfile control fields
-        end-proc;
-
-        * Display Full Record (20 fields) Procedure *
-
-        dcl-proc displayFullRecord;
-          // Chain the record and display all 20 fields on a separate format
-          chain keyField myFile;
-          if %found(myFile);
-            // Map the full 20 fields from the file to a display format
-            myFullRecordDS.keyField = myFile.keyField;
-            myFullRecordDS.field1 = myFile.field1;
-            myFullRecordDS.field2 = myFile.field2;
-            // ... Map remaining fields (total 20 fields)
-
-            exfmt fullRecordDisplay; // Display full record screen
-          else;
-            dsply ('Record not found.');
-          endif;
-        end-proc;
-
-        * Update Subfile Control Fields *
-
-        dcl-proc updateControlField;
-          sflSize = rrn;
-          sflPage = 10;
-          write controlRecord; // Write control record to subfile display
-        end-proc;
-      `}
+        *INLR = *ON;
+        RETURN;
+      /end-free
+`}
     </code>
   </pre>
-</div> */}
-
-  </main>
+</div> 
+</main>
   )
 }
