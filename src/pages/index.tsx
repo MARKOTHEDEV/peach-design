@@ -810,29 +810,69 @@ export default function Home() {
     <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
       <code>
         {`
-     **w
+     ctl-opt dftactgrp(*no) option(*srcstmt:*nodebugio);
+
+dcl-f HISTORYDSPF workstn;
+
+dcl-s page int(10) inz(1);
+dcl-s totalRecords int(10);
+dcl-s startRecord int(10);
+dcl-s eofFlag ind;
+
+// Structure to hold fields from HISTORYPF
+dcl-ds historyRecord qualified;
+   recID       int(10);
+   recDate     date;
+   recTime     time;
+   recDetail1  varchar(50);
+   recDetail2  varchar(50);
+   recUser     varchar(20);
+   recStatus   varchar(10);
+   recNotes    varchar(100);
+end-ds;
+
+// Array to store fetched records
+dcl-ds subfileData likeDS(historyRecord) dim(15);
+
+exec sql set option commit = *none;
+
+// Calculate total records
+exec sql select count(*) into :totalRecords from HISTORYPF;
+
+// Main loop
+dou *inlr;
+
+    // Calculate starting record for the current page
+    startRecord = (page - 1) * 15;
+
+    // Fetch paginated records
     exec sql
         declare global temporary table session.temp_history
-        as (select RECDETAIL
+        as (select RECID, RECDATE, RECTIME, RECDETAIL1, RECDETAIL2, RECUSER, RECSTATUS, RECNOTES
             from HISTORYPF
             order by RECID
             limit 15 offset :startRecord) with data;
 
-    exec sql declare c1 cursor for select RECDETAIL from session.temp_history;
+    exec sql declare c1 cursor for 
+        select RECID, RECDATE, RECTIME, RECDETAIL1, RECDETAIL2, RECUSER, RECSTATUS, RECNOTES 
+        from session.temp_history;
     exec sql open c1;
 
     clear *in91; // Clear SFLEND flag
     clear *in90; // Clear SFLCLR flag
     eofFlag = *off;
 
+    // Fetch and populate subfile data
     for currentRecord = 1 to 15;
-        exec sql fetch c1 into :recordText;
+        exec sql fetch c1 into :historyRecord.recID, :historyRecord.recDate, :historyRecord.recTime,
+                             :historyRecord.recDetail1, :historyRecord.recDetail2,
+                             :historyRecord.recUser, :historyRecord.recStatus, :historyRecord.recNotes;
         if sqlcode <> 0;
             eofFlag = *on;
             leave;
         endif;
 
-        // Write to subfile
+        // Map data to subfile fields
         write HISTORYSFL;
     endfor;
 
@@ -846,7 +886,6 @@ export default function Home() {
 
     // Display all parts of the screen
     write HISTORYFKEYS;  // Display function keys
-    write HISTORYMSG;    // Display message area
     exfmt HISTORYCTL;    // Handle user input for the subfile
 
     // Handle function keys
@@ -863,25 +902,6 @@ export default function Home() {
 enddo;
 
 *inlr = *on;
-
-
-A          R HISTORYSFL                  SFL
-A            RECID         5P 0O  5  2
-A            RECDETAIL     50A  O  5 10
-
-A          R HISTORYCTL                  SFLCTL(HISTORYSFL)
-A                                      SFLPAG(15)
-A                                      SFLSIZ(15)
-A                                      SFLDSP
-A                                      SFLDSPCTL
-A  90                                  SFLCLR
-A  91                                  SFLEND
-A                                      OVERLAY
-A            SFLRCDNBR      4S 0H SFLRCDNBR(CURSOR)
-
-A          R HISTORYFKEYS
-A                                      OVERLAY
-A            FKEYS          50A  O 24  2
 `}
     </code>
   </pre>
