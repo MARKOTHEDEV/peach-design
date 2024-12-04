@@ -810,99 +810,78 @@ export default function Home() {
     <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
       <code>
         {`
-          A* Subfile Record Format
-      A          R SFL                       SFL
-      A            FOLD_IND       1A  H
-      A            COL1          10A  O  2  2
-      A            COL2          10A  O  2 14
-      A            COL3          10A  O  2 26
-      A            COL4          10A  H
-      A            COL5          10A  H
-      A            COL6          10A  H
-      A            COL7          10A  H
-      A            COL8          10A  H
+     **w
+    exec sql
+        declare global temporary table session.temp_history
+        as (select RECDETAIL
+            from HISTORYPF
+            order by RECID
+            limit 15 offset :startRecord) with data;
 
-      A* Subfile Control Format
-      A          R SFLCTL                   SFLCTL(SFL)
-      A                                      SFLSIZ(9999)
-      A                                      SFLPAG(10)
-      A                                      OVERLAY
-      A  25                                  SFLCLR
-      A  26                                  SFLDSP
-      A  27                                  SFLDSPCTL
-      A            HEADER1       10A  O  1  2
-      A            HEADER2       10A  O  1 14
-      A            HEADER3       10A  O  1 26
-      A            HEADER4       10A  O  3  2
-      A            HEADER5       10A  O  3 14
-      A            HEADER6       10A  O  3 26
-      A            HEADER7       10A  O  3 38
-      A            HEADER8       10A  O  3 50
-      A            CMD_KEY        1A  B  1 70CHECK(LC)
+    exec sql declare c1 cursor for select RECDETAIL from session.temp_history;
+    exec sql open c1;
 
-      fSUBFILE    CF   E             WORKSTN
+    clear *in91; // Clear SFLEND flag
+    clear *in90; // Clear SFLCLR flag
+    eofFlag = *off;
 
-      d FOLD_IND       s              1A
-      d CMD_KEY        s              1A
-      d RRN            s              4S 0
+    for currentRecord = 1 to 15;
+        exec sql fetch c1 into :recordText;
+        if sqlcode <> 0;
+            eofFlag = *on;
+            leave;
+        endif;
 
-      /free
-        // Initialize headers
-        HEADER1 = 'Col 1';
-        HEADER2 = 'Col 2';
-        HEADER3 = 'Col 3';
-        HEADER4 = 'Col 4';
-        HEADER5 = 'Col 5';
-        HEADER6 = 'Col 6';
-        HEADER7 = 'Col 7';
-        HEADER8 = 'Col 8';
+        // Write to subfile
+        write HISTORYSFL;
+    endfor;
 
-        // Populate subfile data
-        RRN = 1;
+    exec sql close c1;
 
-        // Add a few sample rows
-        FOLD_IND = '0'; // Folded by default
+    if eofFlag;
+        *in91 = *on; // End of subfile
+    endif;
 
-        COL1 = 'Row1-C1';
-        COL2 = 'Row1-C2';
-        COL3 = 'Row1-C3';
-        COL4 = 'Row1-C4';
-        COL5 = 'Row1-C5';
-        COL6 = 'Row1-C6';
-        COL7 = 'Row1-C7';
-        COL8 = 'Row1-C8';
-        WRITE SFL;
+    *in90 = *on; // Clear subfile
 
-        RRN += 1;
+    // Display all parts of the screen
+    write HISTORYFKEYS;  // Display function keys
+    write HISTORYMSG;    // Display message area
+    exfmt HISTORYCTL;    // Handle user input for the subfile
 
-        COL1 = 'Row2-C1';
-        COL2 = 'Row2-C2';
-        COL3 = 'Row2-C3';
-        COL4 = 'Row2-C4';
-        COL5 = 'Row2-C5';
-        COL6 = 'Row2-C6';
-        COL7 = 'Row2-C7';
-        COL8 = 'Row2-C8';
-        WRITE SFL;
+    // Handle function keys
+    select;
+        when *in02; // F2 Previous
+            if page > 1;
+                page -= 1;
+            endif;
+        when *in17; // F17 Top
+            page = 1;
+        when *in18; // F18 Bottom
+            page = %div(totalRecords : 15) + (%rem(totalRecords : 15) > 0);
+    endsl;
+enddo;
 
-        // Display subfile in loop
-        DOW NOT *IN03;
-            WRITE SFLCTL;
-            EXFMT SFLCTL;
+*inlr = *on;
 
-            SELECT;
-              WHEN CMD_KEY = '1'; // Toggle to expanded view
-                  FOLD_IND = '1'; // Enable all columns
-              WHEN CMD_KEY = '2'; // Toggle to folded view
-                  FOLD_IND = '0'; // Show only primary columns
-              OTHER;
-                  LEAVE;
-            ENDSELECT;
-        ENDDO;
 
-        *INLR = *ON;
-        RETURN;
-      /end-free
+A          R HISTORYSFL                  SFL
+A            RECID         5P 0O  5  2
+A            RECDETAIL     50A  O  5 10
+
+A          R HISTORYCTL                  SFLCTL(HISTORYSFL)
+A                                      SFLPAG(15)
+A                                      SFLSIZ(15)
+A                                      SFLDSP
+A                                      SFLDSPCTL
+A  90                                  SFLCLR
+A  91                                  SFLEND
+A                                      OVERLAY
+A            SFLRCDNBR      4S 0H SFLRCDNBR(CURSOR)
+
+A          R HISTORYFKEYS
+A                                      OVERLAY
+A            FKEYS          50A  O 24  2
 `}
     </code>
   </pre>
