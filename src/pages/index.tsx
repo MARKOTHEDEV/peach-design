@@ -810,98 +810,151 @@ export default function Home() {
     <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto">
       <code>
         {`
-     ctl-opt dftactgrp(*no) option(*srcstmt:*nodebugio);
+     **Free
+ctl-opt dftactgrp(*no) option(*srcstmt:*nodebugio);
 
-dcl-f HISTORYDSPF workstn;
+// Declare program parameters
+dcl-pi *n;
+   param1 char(14); // First parameter (14 characters)
+   param2 char(10); // Second parameter (10 characters)
+end-pi;
 
+// Declare data structures for headers and subfile
+dcl-ds headerRecord qualified;
+   hdrField1 varchar(50);
+   hdrField2 varchar(50);
+   hdrField3 varchar(50);
+   hdrField4 varchar(50);
+end-ds;
+
+dcl-ds subfileRecord qualified;
+   field1 int(10);
+   field2 varchar(20);
+   field3 varchar(30);
+   field4 varchar(50);
+   field5 varchar(20);
+   timestampField timestamp;
+   field7 varchar(100);
+end-ds;
+
+// Declare variables for paging and records
 dcl-s page int(10) inz(1);
 dcl-s totalRecords int(10);
 dcl-s startRecord int(10);
 dcl-s eofFlag ind;
 
-// Structure to hold fields from HISTORYPF
-dcl-ds historyRecord qualified;
-   recID       int(10);
-   recDate     date;
-   recTime     time;
-   recDetail1  varchar(50);
-   recDetail2  varchar(50);
-   recUser     varchar(20);
-   recStatus   varchar(10);
-   recNotes    varchar(100);
-end-ds;
-
-// Array to store fetched records
-dcl-ds subfileData likeDS(historyRecord) dim(15);
-
 exec sql set option commit = *none;
 
-// Calculate total records
-exec sql select count(*) into :totalRecords from HISTORYPF;
+// Step 1: Retrieve header information (common columns based on param1 and param2)
+exec sql
+    select HDRFIELD1, HDRFIELD2, HDRFIELD3, HDRFIELD4
+    into :headerRecord.hdrField1, :headerRecord.hdrField2, :headerRecord.hdrField3, :headerRecord.hdrField4
+    from PHYSICAL_FILE
+    where CONDITION_COLUMN1 = :param1 and CONDITION_COLUMN2 = :param2
+    fetch first row only;
 
-// Main loop
+write HEADER; // Display the header fields on the screen
+
+// Step 2: Calculate the total number of subfile records
+exec sql
+    select count(*) 
+    into :totalRecords 
+    from PHYSICAL_FILE
+    where CONDITION_COLUMN1 = :param1 and CONDITION_COLUMN2 = :param2;
+
+// Step 3: Main loop for subfile paging
 dou *inlr;
 
     // Calculate starting record for the current page
     startRecord = (page - 1) * 15;
 
-    // Fetch paginated records
+    // Fetch subfile records for the current page
     exec sql
-        declare global temporary table session.temp_history
-        as (select RECID, RECDATE, RECTIME, RECDETAIL1, RECDETAIL2, RECUSER, RECSTATUS, RECNOTES
-            from HISTORYPF
-            order by RECID
-            limit 15 offset :startRecord) with data;
+        declare c1 cursor for 
+        select FIELD1, FIELD2, FIELD3, FIELD4, FIELD5, TIMESTAMP_FIELD, FIELD7
+        from PHYSICAL_FILE
+        where CONDITION_COLUMN1 = :param1 and CONDITION_COLUMN2 = :param2
+        order by TIMESTAMP_FIELD
+        limit 15 offset :startRecord;
 
-    exec sql declare c1 cursor for 
-        select RECID, RECDATE, RECTIME, RECDETAIL1, RECDETAIL2, RECUSER, RECSTATUS, RECNOTES 
-        from session.temp_history;
     exec sql open c1;
 
     clear *in91; // Clear SFLEND flag
     clear *in90; // Clear SFLCLR flag
     eofFlag = *off;
 
-    // Fetch and populate subfile data
     for currentRecord = 1 to 15;
-        exec sql fetch c1 into :historyRecord.recID, :historyRecord.recDate, :historyRecord.recTime,
-                             :historyRecord.recDetail1, :historyRecord.recDetail2,
-                             :historyRecord.recUser, :historyRecord.recStatus, :historyRecord.recNotes;
+        exec sql fetch c1 into :subfileRecord.field1, :subfileRecord.field2, 
+                             :subfileRecord.field3, :subfileRecord.field4,
+                             :subfileRecord.field5, :subfileRecord.timestampField, 
+                             :subfileRecord.field7;
+
         if sqlcode <> 0;
             eofFlag = *on;
             leave;
         endif;
 
-        // Map data to subfile fields
-        write HISTORYSFL;
+        // Write the subfile record
+        write SUBFILE;
     endfor;
 
     exec sql close c1;
 
     if eofFlag;
-        *in91 = *on; // End of subfile
+        *in91 = *on; // Set SFLEND to indicate the end of the subfile
     endif;
 
-    *in90 = *on; // Clear subfile
+    *in90 = *on; // Clear the subfile for the next page
 
-    // Display all parts of the screen
-    write HISTORYFKEYS;  // Display function keys
-    exfmt HISTORYCTL;    // Handle user input for the subfile
+    // Display the subfile and handle user input
+    exfmt SUBCTL;
 
-    // Handle function keys
+    // Step 4: Handle function key input for navigation
     select;
-        when *in02; // F2 Previous
+        when *in02; // F2 - Previous page
             if page > 1;
                 page -= 1;
             endif;
-        when *in17; // F17 Top
+        when *in17; // F17 - First page
             page = 1;
-        when *in18; // F18 Bottom
+        when *in18; // F18 - Last page
             page = %div(totalRecords : 15) + (%rem(totalRecords : 15) > 0);
     endsl;
 enddo;
 
 *inlr = *on;
+A          R HEADER                     // Header format
+A                                      OVERLAY
+A            HDRFIELD1     50A  O  2  2   // Header field 1
+A            HDRFIELD2     50A  O  3  2   // Header field 2
+A            HDRFIELD3     50A  O  4  2   // Header field 3
+A            HDRFIELD4     50A  O  5  2   // Header field 4
+
+A          R SUBFILE                     SFL
+A            FIELD1         10S 0O  7  2   // Subfile column 1
+A            FIELD2         20A  O  7 14   // Subfile column 2
+A            FIELD3         30A  O  7 36   // Subfile column 3
+A            FIELD4         50A  O  7 68   // Subfile column 4
+A            FIELD5         20A  O  7 120  // Subfile column 5
+A            TIMESTAMPF     Z   O  7 150   // Timestamp field
+A            FIELD7        100A  O  7 180  // Subfile column 7
+
+A          R SUBCTL                     SFLCTL(SUBFILE)
+A                                      SFLPAG(15)        // 15 rows per page
+A                                      SFLSIZ(15)        // Subfile size
+A                                      SFLDSP            // Subfile display
+A                                      SFLDSPCTL         // Display control
+A  90                                  SFLCLR            // Clear subfile
+A  91                                  SFLEND            // End of subfile
+A                                      OVERLAY           // Overlay subfile
+A            SFLRCDNBR      4S 0H SFLRCDNBR(CURSOR)      // Cursor position
+
+A          R FKEYS                      // Function key display
+A                                      OVERLAY
+A            FKEY1         20A  O 24  2      'F2=Previous'
+A            FKEY2         20A  O 24 24      'F17=Top'
+A            FKEY3         20A  O 24 44      'F18=Bottom'
+
 `}
     </code>
   </pre>
